@@ -1,0 +1,1 @@
+var express=require("express"),app=express(),path=require("path");app.get("/",function(e,s){s.sendFile(path.join(__dirname+"/index.html"))}),app.use(express.static("public"));var server=app.listen(3e3,function(){var e=server.address().address,s=server.address().port;console.log("Example app listening at http://%s:%s",e,s)});
