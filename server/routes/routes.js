@@ -38,7 +38,7 @@ module.exports = function(app, db) {
       const lng2 = resort.coords[1];
       return {
         name: resort.name,
-        distance: distance(lat1, lng1, lat2, lng2)
+        distance: Math.round(distance(lat1, lng1, lat2, lng2) * 100) / 100
       }
     }).sort((a, b) => a.distance - b.distance);
 
