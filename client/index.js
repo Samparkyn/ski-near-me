@@ -13,10 +13,7 @@ function startApp() {
     fetch(coordsAPIURL)
       .then(response => response.json())
       .then(data => {
-        console.log('data', data);
         const coords = data.results[0].geometry.location;
-        // const coords = [51.498747, -0.081656];
-        console.log(data, coords);
         
         const skiAPIURL = `http://localhost:8000/resorts/closest?lat=${coords.lat}&lng=${coords.lng}`;
         console.log('skiapi', skiAPIURL);
@@ -30,8 +27,53 @@ function startApp() {
         })
       })
       .then(response => response.json())
-      .then(data => {
-        console.log('response from the server:', data);
-      })
+      .then(displayResults)
   });
+  
 }
+
+function createResortCard(resort){
+  const result = document.createElement('div');
+  result.classList.add('result-container');
+  
+  const name = document.createElement('h3');
+  name.classList.add('resort-name');
+  name.innerText = resort.name;
+  
+  const distance = document.createElement('p');
+  distance.classList.add('resort-distance');
+  distance.innerText = resort.distance;
+  
+  const website = document.createElement('a');
+  website.classList.add('resort-website');
+  website.innerText = resort.website;
+  
+  result.appendChild(name);
+  result.appendChild(distance);
+  result.appendChild(website);
+  
+  return result;
+}
+
+function displayResults(data) {
+  const resorts = data;
+  console.log(resorts);
+  const container = document.querySelector('.results-container');
+  
+  resorts.map(resort => {
+    const card = createResortCard(resort);
+    container.appendChild(card);
+  });
+  
+}
+
+
+
+// create an element => document.createElement('div');
+// put an element inside another => element.appendChild(anotherElement)
+// add a class to an element => element.classList.add('nameOfTheClass')
+
+  // forEach resort:
+  // 1. call the render function eg: makeCard()
+  // create the necessary elements to display the data eg: name, distance, website
+  // put all the resort results together inside the results-container

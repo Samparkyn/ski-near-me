@@ -24,3 +24,27 @@ h1 {
   background-position: center;
   height: 100px;
 }
+
+.results-container {
+  border: 2px solid black;
+}
+
+.result-container {
+  border: 2px solid red;
+  text-align: center;
+  height: 200px;
+  width: 220px;
+}
+
+.resort-name {
+  color: skyblue;
+  padding-top: 20px;
+}
+
+.resort-distance {
+  
+}
+
+.resort-website {
+  
+}

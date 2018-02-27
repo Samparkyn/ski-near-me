@@ -29,22 +29,22 @@ module.exports = function(app, db) {
     // get the coordinates that the client (browser) sends to the server
     const lat1 = parseFloat(req.query.lat)
     const lng1 = parseFloat(req.query.lng)
-    console.log(lat1, lng1);
-    console.log(req.query);
     // const limit = req.query.limit
     
     const distances = resorts.map((resort) => {
       const lat2 = resort.coords[0];
       const lng2 = resort.coords[1];
+      console.log(resort);
       return {
         name: resort.name,
-        distance: Math.round(distance(lat1, lng1, lat2, lng2) * 100) / 100
+        distance: Math.round(distance(lat1, lng1, lat2, lng2) * 100) / 100,
+        website: resort.officialWebsite
       }
     }).sort((a, b) => a.distance - b.distance);
 
     // const closest = distances.slice(0, limit);
     const closest = distances.slice(0, 10);
-    res.send(JSON.stringify({closest}))
+    res.send(JSON.stringify(closest))
     // get this to work :)
   });
 };
